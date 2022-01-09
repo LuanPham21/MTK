@@ -1,0 +1,42 @@
+﻿@model MyProject.LoaiSanPham
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Admin/LayoutAdmin.cshtml";
+}
+<h3 class="text-center lead mb-3 font-weight-bold" style="font-size: 36px; text-shadow: 0 0 8px rgba(0,0,0,0.2)" data-aos="flip-right">
+    Sửa danh sách loại sản phẩm
+</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    
+
+
+        @Html.HiddenFor(model => model.MaLoaiSP)
+        <div class="form-group">
+            <div class="editor-label">
+                @*@Html.LabelFor(model => model.TenLoaiSP)*@
+                <p class="col-md-10">Tên loại sản phẩm</p>
+            </div>
+            <div class="editor-field col-md-10">
+                @Html.TextBoxFor(model => model.TenLoaiSP, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TenLoaiSP, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-5 col-sm-offset-4 col-sm-5">
+                <input type="submit" value="Sửa" class="btn btn-primary" />
+            </div>
+        </div>
+   
+}
+
+<div>
+    <a class="btn btn-info" href="@Url.Action("Index","loaisp")">Quay lại</a>
+</div>
+
+

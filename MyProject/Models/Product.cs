@@ -28,7 +28,7 @@ namespace MyProject.Models
             {
                 QLBanQuanAoDataContext db = new QLBanQuanAoDataContext();
 
-                string filePath = @"D:\bai\HK1 2021-2022\MauThietKePM\MyProject\MyProject\FileTXT\demo.txt";
+                string filePath = @"D:\MTTK\Cuoi_Ky\Do_An\MyProject\FileTXT\demo.txt";
                 string[] lines;
                 string str;
                 string s = _sp.TenSP;

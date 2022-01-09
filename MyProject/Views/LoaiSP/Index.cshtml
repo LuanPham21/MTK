@@ -5,15 +5,55 @@
     Layout = "~/Views/Admin/LayoutAdmin.cshtml";
 }
 
-<h2>Index</h2>
+<h3 class="text-center lead mb-3 font-weight-bold" style="font-size: 36px; text-shadow: 0 0 8px rgba(0,0,0,0.2)" data-aos="flip-right">
+    Danh sách các loại sản phẩm
+</h3>
 
-<p>
-    @Html.ActionLink("Thêm mới", "Create")
-</p>
-<table>
-    <tr>
+@using (Html.BeginForm("index", "loaisp"))
+{
+    <div class="d-flex" data-aos="fade-left">
+        <div class="group">
+            <input class="txtTimKiem" type="text" name="name" autocomplete="off" required>
+            <label class="timKiem">Tìm kiếm loại sản phẩm</label>
+        </div>
+        <button class="btnStyle btn1 ml-3" style="width:90px; height:40px; line-height:16px;">Search</button>
+    </div>
+}
+<a href="@Url.Action("Create","loaisp")" class="btn btn-primary user-btn-them">Thêm mới</a>
+
+@*<table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenLoaiSP)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenLoaiSP)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MaLoaiSP }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MaLoaiSP }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MaLoaiSP })
+                </td>
+            </tr>
+        }
+
+    </table>*@
+
+<table class="table table-bordered table-hover mt-4">
+    <tr class="info">
         <th>
-            @Html.DisplayNameFor(model => model.TenLoaiSP)
+            @*@Html.DisplayNameFor(model => model.MaLoaiSP)*@
+            <label style="position:initial; color:#000; font-weight:bold">Mã chức vụ</label>
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.TenChucVu)*@
+            <label  style="position:initial; color:#000; font-weight:bold">Tên chức vụ</label>
         </th>
         <th></th>
     </tr>
@@ -22,12 +62,15 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.TenLoaiSP)
+                @Html.DisplayFor(modelItem => item.MaLoaiSP)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.MaLoaiSP }) |
-                @Html.ActionLink("Details", "Details", new { id = item.MaLoaiSP }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.MaLoaiSP })
+                @Html.DisplayFor(modelItem => item.TenLoaiSP)
+            </td>
+            <td class="text-center">
+                <a class="btn btn-warning " href="@Url.Action("Edit",new { id=item.MaLoaiSP})"><span style="margin-left:0px" class="fas fa-pencil-alt"></span></a>
+                @*<a class="btn btn-danger " href="@Url.Action("Details",new { id=item.MaChucVuNV.Trim()})"><span class="far fa-clipboard"></span></a>*@
+                <a class="btn btn-danger " href="@Url.Action("Delete",new { id=item.MaLoaiSP})"><span class="fas fa-trash"></span></a>
             </td>
         </tr>
     }

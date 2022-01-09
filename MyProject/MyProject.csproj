@@ -129,6 +129,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IIterator.cs" />
     <Compile Include="Controllers\LoaiSPController.cs" />
+    <Compile Include="Controllers\NhaCungCapController.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
     <Compile Include="Controllers\SingletonPattern.cs" />
     <Compile Include="Controllers\ThemXoaSuaController.cs" />
@@ -163,6 +164,7 @@
     <Content Include="Content\PagedList.css" />
     <Content Include="FileTXT\demo.txt" />
     <Content Include="Global.asax" />
+    <Content Include="HomeLayout\CSS\style.css" />
     <Content Include="Images\adidas-logo.png" />
     <Content Include="Images\airf1-logo1.png" />
     <Content Include="Images\background-giay1-test.png" />
@@ -473,6 +475,12 @@
     <Content Include="Views\ThemXoaSua\_Notifications.cshtml" />
     <Content Include="Views\LoaiSP\Index.cshtml" />
     <Content Include="Views\LoaiSP\Create.cshtml" />
+    <Content Include="Views\LoaiSP\Edit.cshtml" />
+    <Content Include="Views\LoaiSP\Delete.cshtml" />
+    <Content Include="Views\NhaCungCap\Index.cshtml" />
+    <Content Include="Views\NhaCungCap\Create.cshtml" />
+    <Content Include="Views\NhaCungCap\Edit.cshtml" />
+    <Content Include="Views\NhaCungCap\Delete.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

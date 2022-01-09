@@ -4,28 +4,27 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using MyProject.Builder;
 
 namespace MyProject.Controllers
 {
-    public class LoaiSPController : Controller
+    public class NhaCungCapController : Controller
     {
         private QLBanQuanAoDataContext db = new QLBanQuanAoDataContext();
 
         // GET: Admin/Hangsanxuats
         public ActionResult Index(string name)
         {
-            if(name == null)
+            if (name == null)
             {
-                return View(db.LoaiSanPhams.ToList());
-                
+                return View(db.NhaCungCaps.ToList());
+
             }
             else
             {
-                return View(db.LoaiSanPhams.Where(s => s.TenLoaiSP.Contains(name)).ToList());
+                return View(db.NhaCungCaps.Where(s => s.TenNCC.Contains(name)).ToList());
             }
         }
-       
+
 
         // GET: Admin/Hangsanxuats/Details/5
         public ActionResult Details(int? id)
@@ -55,35 +54,33 @@ namespace MyProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(string ten1)
+        public ActionResult Create(NhaCungCap ncc)
         {
             if (Session["Admin"] == null)
             {
                 return RedirectToAction("DangNhap", "DangNhap");
             }
+            //NhaCungCap ncc= new NhaCungCap();
+            if (ncc == null)
+            {
+                return HttpNotFound();
+            }
+          
             if (ModelState.IsValid)
             {
-                //ten = "123";
-                var loai = new LoaiSanPhamBuilder().AddTenSP(ten1).Build();
-                db.LoaiSanPhams.InsertOnSubmit(loai);
-                db.SubmitChanges();
-                return RedirectToAction("Index");
+                var check = db.NhaCungCaps.Where(s => s.TenNCC == ncc.TenNCC).FirstOrDefault();
+                if (check == null)
+                {
+                    
+                    db.NhaCungCaps.InsertOnSubmit(ncc);
+                    db.SubmitChanges();
+                    return RedirectToAction("Index", "nhacungcap");
+                }
             }
+            db.SubmitChanges();
 
             return View();
-            //LoaiSanPham sanPham = new LoaiSanPham();
-            //if (sanPham == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //if(ten != "")
-            //{
-            //    var loai = new LoaiSPBuilder().AddTenLoaiSP(ten).Build();
-            //    db.LoaiSanPhams.InsertOnSubmit(loai);
-            //    db.SubmitChanges();
-            //    return RedirectToAction("Index");
-
-            //}
+           
 
 
         }
@@ -91,9 +88,9 @@ namespace MyProject.Controllers
         // GET: Admin/Hangsanxuats/Edit/5
         public ActionResult Edit(int id)
         {
-            LoaiSanPham sp = new LoaiSanPham();
+            NhaCungCap sp = new NhaCungCap();
 
-            return View(db.LoaiSanPhams.Where(s => s.MaLoaiSP == id).FirstOrDefault());
+            return View(db.NhaCungCaps.Where(s => s.MaNCC == id).FirstOrDefault());
         }
 
         // POST: Admin/Hangsanxuats/Edit/5
@@ -101,54 +98,56 @@ namespace MyProject.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(LoaiSanPham sp, int id)
+        public ActionResult Edit(NhaCungCap sp, int id)
         {
             if (Session["Admin"] == null)
             {
                 return RedirectToAction("DangNhap", "DangNhap");
             }
-            LoaiSanPham sanPham = db.LoaiSanPhams.FirstOrDefault(ma => ma.MaLoaiSP == id);
+            NhaCungCap sanPham = db.NhaCungCaps.FirstOrDefault(ma => ma.MaNCC == id);
             if (sanPham == null)
             {
                 return HttpNotFound();
             }
 
-            LoaiSanPham sp1 = db.LoaiSanPhams.FirstOrDefault(x => x.MaLoaiSP == id);
+            NhaCungCap sp1 = db.NhaCungCaps.FirstOrDefault(x => x.MaNCC == id);
 
             if (sp1 != null)
             {
-                sp1.TenLoaiSP = sp.TenLoaiSP;
+                sp1.TenNCC = sp.TenNCC;
+                sp1.DiaChi = sp.DiaChi;
+                sp1.SDT = sp.SDT;
                 db.SubmitChanges();
-                return RedirectToAction("index", "loaisp");
+                return RedirectToAction("index", "nhacungcap");
             }
-           else
-            
-            return View();
+            else
+
+                return View();
         }
         public ActionResult Delete(int id)
         {
-            LoaiSanPham sp = new LoaiSanPham();
+            NhaCungCap sp = new NhaCungCap();
 
-            return View(db.LoaiSanPhams.Where(s => s.MaLoaiSP == id).FirstOrDefault());
+            return View(db.NhaCungCaps.Where(s => s.MaNCC == id).FirstOrDefault());
         }
         [HttpPost]
         // GET: Admin/Hangsanxuats/Delete/5
-        public ActionResult Delete(LoaiSanPham sp,int id)
+        public ActionResult Delete(NhaCungCap sp, int id)
         {
             if (Session["Admin"] == null)
             {
                 return RedirectToAction("DangNhap", "DangNhap");
             }
-            LoaiSanPham sanPham = db.LoaiSanPhams.FirstOrDefault(ma => ma.MaLoaiSP == id);
+            NhaCungCap sanPham = db.NhaCungCaps.FirstOrDefault(ma => ma.MaNCC== id);
             if (sanPham == null)
             {
                 return HttpNotFound();
             }
-            db.LoaiSanPhams.DeleteOnSubmit(sanPham);
+            db.NhaCungCaps.DeleteOnSubmit(sanPham);
             db.SubmitChanges();
-            return RedirectToAction("Index", "LoaiSP");
+            return RedirectToAction("Index", "nhacungcap");
 
-       
+
         }
 
 
@@ -160,5 +159,6 @@ namespace MyProject.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }

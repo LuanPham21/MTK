@@ -61,7 +61,7 @@ namespace MyProject.Controllers
                 var code = p.createSP(tenSP, moTa, gioiTinh, giaBan, giaNhap, anh, maLoaiSP, maNCC, soLuongTon);
                 if (code == CodeSP.Valid)
                 {
-                    TempData["Success"] = "Thêm sản phẩm thành công";
+                    PrintNotiSuccess();
                     return RedirectToAction("ThemSanPham", "ThemXoaSua");
 
 
@@ -69,7 +69,7 @@ namespace MyProject.Controllers
                 else
                 {
                     //ViewBag.Error = "Tên nhập không hợp lệ";
-                    TempData["ErrorMessage"] = "Vui lòng nhập lại tên sản phẩm";
+                    PrintNotiError();                    
                     return RedirectToAction("ThemSanPham", "ThemXoaSua");
                 }
                 //SPFactory sp = new SPFactory();
@@ -113,10 +113,7 @@ namespace MyProject.Controllers
         public ActionResult SuaSanPham(int maSP)
         {
             SanPham sp = new SanPham();
-            //List<MaLoaiSP> listTG = db.LoaiSanPhams.ToList();
-            //ViewBag.MaTonGiao = new SelectList(db.TonGiaos, "MaTonGiao", "TenTonGiao", nv.MaTonGiao);
-            //List<DanToc> listDT = db.DanTocs.ToList();
-            //ViewBag.MaDanToc = new SelectList(db.DanTocs, "MaDanToc", "TenDanToc", nv.MaDanToc);
+
             return View(db.SanPhams.Where(s => s.MaSP == maSP).FirstOrDefault());
         }
 
@@ -290,14 +287,14 @@ namespace MyProject.Controllers
             return RedirectToAction("QuanLiKhachHang", "ThemXoaSua");
         }
 
-        protected override void PrintRoutes()
+        protected override void PrintNotiSuccess()
         {
-            this.AddNotification("Vui lòng nhập từ khóa để tìm kiếm theo mã quy định!", NotificationType.WARNING);
+            TempData["Success"] = "Thêm sản phẩm thành công";
         }
 
-        protected override void PrintDIs()
+        protected override void PrintNotiError()
         {
-            this.AddNotification("Vui lòng nhập từ khóa để tìm kiếm theo tên quy định!", NotificationType.WARNING);
+            TempData["ErrorMessage"] = "Vui lòng nhập lại tên sản phẩm";
         }
     }
 }

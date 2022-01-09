@@ -1,0 +1,58 @@
+﻿@model MyProject.NhaCungCap
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Admin/LayoutAdmin.cshtml";
+}
+
+<h3 class="text-center lead mb-3 font-weight-bold" style="font-size: 36px; text-shadow: 0 0 8px rgba(0,0,0,0.2)" data-aos="flip-right">
+    Thêm danh sách nhà cung cấp
+</h3>
+
+@using (Html.BeginForm("create","nhacungcap",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @*@Html.HiddenFor(model => model.MaNCC)*@
+    
+    <div class="form-group">
+        <p class="col-md-10">Tên nhà cung cấp:</p>
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.TenNCC, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TenNCC, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <p class="col-md-10">Địa chỉ:</p>
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.DiaChi, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+    <div class="form-group">
+        <p class="col-md-10">Số điện thoại:</p>
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.SDT, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.SDT, "", new { @class = "text-danger" })
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Thêm mới" class="btn btn-dark" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    <a class="btn btn-info" href="@Url.Action("Index","nhacungcap")">Quay lại</a>
+
+</div>
+
+

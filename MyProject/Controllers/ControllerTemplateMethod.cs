@@ -8,14 +8,14 @@ namespace MyProject.Controllers
 {
     public abstract class ControllerTemplateMethod : Controller
     {
-        protected abstract void PrintRoutes();
-        protected abstract void PrintDIs();
+        protected abstract void PrintNotiSuccess();
+        protected abstract void PrintNotiError();
 
         // Template method
         public void PrintInformation()
         {
-            PrintRoutes();
-            PrintDIs();
+            PrintNotiSuccess();
+            PrintNotiError();
         }
     }
 }

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<MyProject.NhaCungCap>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Admin/LayoutAdmin.cshtml";
+}
+
+<h3 class="text-center lead mb-3 font-weight-bold" style="font-size: 36px; text-shadow: 0 0 8px rgba(0,0,0,0.2)" data-aos="flip-right">
+    Danh sách các loại sản phẩm
+</h3>
+
+@using (Html.BeginForm("index", "nhacungcap"))
+{
+    <div class="d-flex" data-aos="fade-left">
+        <div class="group">
+            <input class="txtTimKiem" type="text" name="name" autocomplete="off" required>
+            <label class="timKiem">Tìm kiếm loại sản phẩm</label>
+        </div>
+        <button class="btnStyle btn1 ml-3" style="width:90px; height:40px; line-height:16px;">Search</button>
+    </div>
+}
+<a href="@Url.Action("Create","nhacungcap")" class="btn btn-primary user-btn-them">Thêm mới</a>
+<table class="table table-bordered table-hover mt-4">
+    <tr class="info">
+        <th>
+            @*@Html.DisplayNameFor(model => model.MaLoaiSP)*@
+            <label style="position:initial; color:#000; font-weight:bold">Mã NCC</label>
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.TenChucVu)*@
+            <label style="position:initial; color:#000; font-weight:bold">Tên NCC</label>
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.TenChucVu)*@
+            <label style="position:initial; color:#000; font-weight:bold">Địa chỉ</label>
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.TenChucVu)*@
+            <label style="position:initial; color:#000; font-weight:bold">SDT</label>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.MaNCC)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TenNCC)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DiaChi)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SDT)
+    </td>
+    <td class="text-center">
+        <a class="btn btn-warning " href="@Url.Action("Edit",new { id=item.MaNCC})"><span style="margin-left:0px" class="fas fa-pencil-alt"></span></a>
+        @*<a class="btn btn-danger " href="@Url.Action("Details",new { id=item.MaChucVuNV.Trim()})"><span class="far fa-clipboard"></span></a>*@
+        <a class="btn btn-danger " href="@Url.Action("Delete",new { id=item.MaNCC})"><span class="fas fa-trash"></span></a>
+    </td>
+</tr>
+    }
+
+</table>
