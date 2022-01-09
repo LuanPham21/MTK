@@ -62,8 +62,7 @@
                             <p class="serv-btn mb-0"><i class="fa fa-tshirt pr-3"></i>Sản phẩm<span class="fas fa-caret-down second"></span></p>
                             <ul class="serv-show">
                                 <li><a href="@Url.Action("DanhMucCacSanPham","Admin")">Danh sách các sản phẩm</a></li>
-                                <li><a href="@Url.Action("TrangPhucNam","Admin")">Trang phục nam</a></li>
-                                <li><a href="@Url.Action("TrangPhucNu","Admin")">Trang phục nữ</a></li>
+                                <li><a href="@Url.Action("Index","LoaiSP")">Danh sách loại sản phẩm</a></li>
                             </ul>
                         </li>
                         <li><a href="@Url.Action("DangXuat", "Admin")"><i class="fa fa-arrow-left pr-3"></i>Exit</a></li>
@@ -159,35 +158,60 @@
     </script>
     <script>
         $(".btnXoaTK").click(function () {
-        var getID = $(this).data("makh");
-        Swal.fire({
-            title: 'Thông báo',
-            text: "Bạn có chắc chắn muốn xoá tài khoản này không?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Xoá'
-        }).then(function (result) {
-            if (result.isConfirmed) {
-                $.ajax({
-                    type: 'POST',
-                    url: 'XoaTaiKhoan',
-                    data: { maKH: getID },
-                    success: function (result) {
-                        Swal.fire({
-                            title: 'Thông báo',
-                            text: "Tài khoản đã xoá khỏi hệ thống",
-                            icon: 'success'
-                        }).then(function (result) {
-                            location.reload();
-                        })
-                    }
+            var getID = $(this).data("makh");
+            Swal.fire({
+                title: 'Thông báo',
+                text: "Bạn có chắc chắn muốn xoá tài khoản này không?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Xoá'
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'XoaTaiKhoan',
+                        data: { maKH: getID },
+                        success: function (result) {
+                            Swal.fire({
+                                title: 'Thông báo',
+                                text: "Tài khoản đã xoá khỏi hệ thống",
+                                icon: 'success'
+                            }).then(function (result) {
+                                location.reload();
+                            })
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <script>
+            var errorText = "@Html.Raw(TempData["ErrorMessage"])";
+            window.onload = function () {
+                Swal.fire({
+                    title: 'Thông báo!',
+                    html: errorText + "<br />" /*+ "Xin quý khách thông cảm "*/,
+                    icon: 'error',
                 })
             }
-        })
-    })
-    </script>
-
+        </script>
+    }
+    @if (TempData["Success"] != null)
+    {
+        <script>
+            var errorText = "@Html.Raw(TempData["Success"])";
+            window.onload = function () {
+                Swal.fire({
+                    title: 'Thông báo!',
+                    html: errorText + "<br />" + "",
+                    icon: 'success',
+                })
+            }
+        </script>
+    }
 </body>
 </html>

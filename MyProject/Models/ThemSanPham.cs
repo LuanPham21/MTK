@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace MyProject.Models {
-    public class ThemSanPham {
+
+    public class ThemSanPham  {
+
         [Required(ErrorMessage = "Tên sản phẩm là gì ?????")]
         [StringLength(50, MinimumLength = 10, ErrorMessage = "Tên sản phẩm ít nhất 10 kí tự !")]
         public string tenSP { get; set; }
@@ -36,5 +39,6 @@ namespace MyProject.Models {
 
         [Required(ErrorMessage = "Vui lòng nhập số lượng tồn")]
         public int soLuongTon { get; set; }
+
     }
 }

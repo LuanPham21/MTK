@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e9609e93581f4294a2aab513d6bb9512" Name="Diagram1">
+        <EntityTypeShape EntityType="QLSHOPTHOITRANGModel.ChiTietHoaDon" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSHOPTHOITRANGModel.HoaDon" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSHOPTHOITRANGModel.KhachHang" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSHOPTHOITRANGModel.LoaiSanPham" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSHOPTHOITRANGModel.NhaCungCap" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSHOPTHOITRANGModel.SanPham" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLSHOPTHOITRANGModel.sysdiagram" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="QLSHOPTHOITRANGModel.FK__ChiTietHoa__MaHD__173876EA" ManuallyRouted="false" />
+        <AssociationConnector Association="QLSHOPTHOITRANGModel.FK__ChiTietHoa__MaSP__182C9B23" ManuallyRouted="false" />
+        <AssociationConnector Association="QLSHOPTHOITRANGModel.FK__HoaDon__MaKH__1273C1CD" ManuallyRouted="false" />
+        <AssociationConnector Association="QLSHOPTHOITRANGModel.FK__SanPham__MaLoaiS__0CBAE877" ManuallyRouted="false" />
+        <AssociationConnector Association="QLSHOPTHOITRANGModel.FK__SanPham__MaNCC__0DAF0CB0" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

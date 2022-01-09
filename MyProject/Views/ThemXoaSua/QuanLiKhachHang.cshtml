@@ -34,13 +34,14 @@
                     <td>
                         @if (item.TinhTrang == false) {
                             <span>Chưa thanh toán</span>
+                            <td><button class="btn btn-danger btnXoaTK" data-makh="@item.MaKH">Xoá</button></td>
+
                         }
                         else {
                             <span>Đã thanh toán</span>
-                        }
-                    </td>
+                            <td><button class="btn btn-danger btnXoaTK" disabled style="cursor:no-drop" data-makh="@item.MaKH">Xoá</button></td>
 
-                    <td><button class="btn btn-danger btnXoaTK" data-makh="@item.MaKH">Xoá</button></td>
+                        }
                 </tr>
             }
         </tbody>

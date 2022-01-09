@@ -183,7 +183,23 @@ namespace MyProject.Controllers {
             db.SubmitChanges();
             Session.Add("NgayGiao", ddh.NgayGiao);
             Session.Add("MaHD", ddh.MaHD);
-            foreach (var item in gh) {
+            //foreach (var item in gh)
+            //{
+            //    ChiTietHoaDon ctdh = new ChiTietHoaDon();
+            //    ctdh.MaHD = ddh.MaHD;
+            //    ctdh.MaSP = item.maSP;
+            //    ctdh.SoLuong = item.soLuong;
+            //    ctdh.DonGia = (decimal)item.donGia;
+            //    db.ChiTietHoaDons.InsertOnSubmit(ctdh);
+            //    Lấy mã sản phẩm trong database
+            //    SanPham sp = db.SanPhams.SingleOrDefault(i => i.MaSP == item.maSP);
+            //    Cập nhật số lượng tồn trong database
+            //    sp.SoLuongTon = sp.SoLuongTon - item.soLuong;
+            //}
+            IIterator iterator = new GioHangIterator(LayGioHang());
+            var item = iterator.First();
+            while (!iterator.IsDone)
+            {
                 ChiTietHoaDon ctdh = new ChiTietHoaDon();
                 ctdh.MaHD = ddh.MaHD;
                 ctdh.MaSP = item.maSP;
@@ -194,6 +210,7 @@ namespace MyProject.Controllers {
                 SanPham sp = db.SanPhams.SingleOrDefault(i => i.MaSP == item.maSP);
                 // Cập nhật số lượng tồn trong database
                 sp.SoLuongTon = sp.SoLuongTon - item.soLuong;
+                item = iterator.Next();
             }
             db.SubmitChanges();
             return RedirectToAction("XacNhanDatHang", "GioHang");

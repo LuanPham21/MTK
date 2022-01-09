@@ -16,9 +16,11 @@ namespace MyProject.Controllers
 
         public ActionResult SanPhamPartial(int page = 1, int pageSize = 12) {
             ViewBag.loaiSP = db.LoaiSanPhams.OrderBy(sp => sp.MaLoaiSP);
-            var dsSanPham = new Product();
-            var model = dsSanPham.ListAll(page, pageSize);
-            return View(model);
+            //var dsSanPham = new Product();
+            //var model = dsSanPham.ListAll(page, pageSize);
+            var sanPham = SingletonPattern.instance.Reset(db);
+            return View(sanPham.ToPagedList(page, pageSize));
+            //return View(model);
         }
 
         public ActionResult SanPhamTheoLoai(int maLoaiSP) {

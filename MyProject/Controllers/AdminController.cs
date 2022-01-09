@@ -40,11 +40,8 @@ namespace MyProject.Controllers
             if (Session["Admin"] == null) {
                 return RedirectToAction("DangNhap", "DangNhap");
             }
-            //var listSP = db.SanPhams.OrderBy(sp => sp.MaSP).ToList();
-            //return View(listSP);
-            var sanPham = new Product();
-            var model = sanPham.ListAll(page, pageSize);
-            return View(model);
+            var sanPham = SingletonPattern.instance.Reset(db);
+            return View(sanPham.ToPagedList(page, pageSize));
         }
 
         public ActionResult DangXuat() {

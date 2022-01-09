@@ -25,27 +25,32 @@
             </thead>
             <tbody>
                 @foreach (var item in Model) {
-                    <tr>
-                        @{
-                    DateTime ngayDat = DateTime.Parse(item.HoaDon.NgayDat.ToString());
-                    
-                        }
-                        <td>@item.MaHD</td>
-                        <td>@item.MaSP</td>
-                        <td>@item.SoLuong</td>
-                        <td>@String.Format("{0:0,0}", item.DonGia)</td>
-                        <td>@item.HoaDon.MaKH</td>
-                        <td>@ngayDat.ToShortDateString()</td>
-                       
-                        @if (item.HoaDon.TinhTrang == false) {
-                            <td>Chưa hoàn thành</td>
-                        }
-                        else {
-                            <td>Hoàn thành</td>
-                        }
+                <tr>
+                    @{
+                        DateTime ngayDat = DateTime.Parse(item.HoaDon.NgayDat.ToString());
+
+                    }
+                    <td>@item.MaHD</td>
+                    <td>@item.MaSP</td>
+                    <td>@item.SoLuong</td>
+                    <td>@String.Format("{0:0,0}", item.DonGia)</td>
+                    <td>@item.HoaDon.MaKH</td>
+                    <td>@ngayDat.ToShortDateString()</td>
+
+                    @if (item.HoaDon.TinhTrang == false)
+                    {
+                        <td>Chưa hoàn thành</td>
                         <td><button class="btn btn-info btnDuyetDH" data-mahd="@item.MaHD">Duyệt</button></td>
                         <td><button class="btn btn-danger btnHuyDH" data-mahd="@item.MaHD">Huỷ</button></td>
-                    </tr>
+
+                    }
+                    else
+                    {
+                        <td>Hoàn thành</td>
+                        <td><button class="btn btn-info btnDuyetDH" disabled style="cursor:no-drop" data-mahd="@item.MaHD">Duyệt</button></td>
+                        <td><button class="btn btn-danger btnHuyDH" disabled style="cursor:no-drop" data-mahd="@item.MaHD">Huỷ</button></td>
+                    }
+                </tr>
                 }
             </tbody>
         </table>

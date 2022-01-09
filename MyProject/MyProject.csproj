@@ -44,6 +44,7 @@
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="PagedList">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -119,13 +120,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\ILoaiSanPham.cs" />
+    <Compile Include="Builder\LoaiSanPhamBuilder.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ControllerTemplateMethod.cs" />
     <Compile Include="Controllers\DangNhapController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IIterator.cs" />
+    <Compile Include="Controllers\LoaiSPController.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
+    <Compile Include="Controllers\SingletonPattern.cs" />
     <Compile Include="Controllers\ThemXoaSuaController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Extensions\NotificationExtensions.cs" />
+    <Compile Include="Factory\Factory.cs" />
+    <Compile Include="Factory\SPFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -140,6 +150,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QLBanQuanAo.dbml</DependentUpon>
     </Compile>
+    <Compile Include="ThemSanPham.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -150,115 +161,32 @@
     <Content Include="BackToTop\main.js" />
     <Content Include="BackToTop\util.js" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="FileTXT\demo.txt" />
     <Content Include="Global.asax" />
-    <Content Include="Images\1.jpg" />
-    <Content Include="Images\1.png" />
-    <Content Include="Images\1banner-2.jpg" />
-    <Content Include="Images\2.jpg" />
-    <Content Include="Images\2.png" />
-    <Content Include="Images\20namchangduong.jpg" />
-    <Content Include="Images\20namthuonghieu.jpg" />
-    <Content Include="Images\3.jpg" />
-    <Content Include="Images\3.png" />
-    <Content Include="Images\4.png" />
-    <Content Include="Images\5.png" />
-    <Content Include="Images\6.jpg" />
-    <Content Include="Images\6.png" />
-    <Content Include="Images\about.jpg" />
-    <Content Include="Images\ao-so-mi-nam-loang-mau.jpg" />
-    <Content Include="Images\ao-so-mi-nu-soc-tay-lung.jpg" />
-    <Content Include="Images\ao-so-mi-nu-tron-from-ao.jpg" />
-    <Content Include="Images\ao-thun-nam-co-tru-ngan-tay.jpg" />
-    <Content Include="Images\ao-thun-nam-hinh-ho-3d.jpg" />
-    <Content Include="Images\ao-thun-nam-ngan-tay.jpg" />
-    <Content Include="Images\ao-thun-nu-hien-dai-cao-cap.jpg" />
-    <Content Include="Images\ao-thun-nu-soc-mau-nang-dong.jpg" />
-    <Content Include="Images\ao-thun-nu-tre-trung-moi.jpg" />
-    <Content Include="Images\AQTG00216-300x300.jpg" />
-    <Content Include="Images\ASD000787-300x300.jpg" />
-    <Content Include="Images\ASDN00698-300x300.jpg" />
-    <Content Include="Images\ASDN00897-180x180.jpg" />
-    <Content Include="Images\ASDN00897-300x300.jpg" />
-    <Content Include="Images\ASH000146-300x300.jpg" />
-    <Content Include="Images\ASN000824-300x300.jpg" />
-    <Content Include="Images\ASNN00699-300x300.jpg" />
-    <Content Include="Images\ASNN00746-300x300.jpg" />
-    <Content Include="Images\ASNN00750-300x300.jpg" />
-    <Content Include="Images\ATH000113-300x300.jpg" />
-    <Content Include="Images\ATH000140-300x300.jpg" />
-    <Content Include="Images\ATHN00120-180x180.jpg" />
-    <Content Include="Images\ATHN00120-300x300.jpg" />
-    <Content Include="Images\background 1.jpg" />
-    <Content Include="Images\background 2.jpg" />
-    <Content Include="Images\background 3.jpg" />
-    <Content Include="Images\background 4.jpg" />
+    <Content Include="Images\adidas-logo.png" />
+    <Content Include="Images\airf1-logo1.png" />
+    <Content Include="Images\background-giay1-test.png" />
+    <Content Include="Images\background-giay2-banner.png" />
+    <Content Include="Images\background-giay3-banner.png" />
     <Content Include="Images\bag.png" />
-    <Content Include="Images\banner-pierre-cardin.jpg" />
-    <Content Include="Images\banner1.jpg" />
-    <Content Include="Images\banner2.jpg" />
+    <Content Include="Images\Balenciaga-logo.png" />
     <Content Include="Images\banner_thanhtuu.jpg" />
-    <Content Include="Images\carousel1.jpg" />
-    <Content Include="Images\carousel2.jpg" />
-    <Content Include="Images\carousel3.jpg" />
-    <Content Include="Images\carousel4.jpg" />
     <Content Include="Images\cart-empty.png" />
-    <Content Include="Images\chan-vay-jean-om.jpg" />
-    <Content Include="Images\chan-vay-jean-rach.jpg" />
-    <Content Include="Images\chan-vay-xep-ly.png" />
     <Content Include="Images\close.png" />
-    <Content Include="Images\cm1.jpg" />
-    <Content Include="Images\cm3.jpg" />
-    <Content Include="Images\cm4crop.jpg" />
-    <Content Include="Images\daidienthuonghieu.jpg" />
-    <Content Include="Images\dam-nu-co-chu-u-xe-ta-sanh-dieu.jpg" />
-    <Content Include="Images\damhoa2lop.jpg" />
-    <Content Include="Images\damluachambi.jpg" />
-    <Content Include="Images\fashionGirl.png" />
-    <Content Include="Images\favicon.ico" />
+    <Content Include="Images\Converse-logo.png" />
+    <Content Include="Images\dangnhap.jpg" />
+    <Content Include="Images\jordan-logo1.png" />
     <Content Include="Images\loading.gif" />
     <Content Include="Images\loadingPage.gif" />
-    <Content Include="Images\LogoFASHIONSTORE.jpg" />
-    <Content Include="Images\Mark_brand.png" />
+    <Content Include="Images\logo-giay1.jpg" />
+    <Content Include="Images\logogiay.jpg" />
     <Content Include="Images\next.png" />
-    <Content Include="Images\PKK000060-300x300.jpg" />
-    <Content Include="Images\PQT000106-180x180.jpg" />
-    <Content Include="Images\PQT000106-300x300.jpg" />
-    <Content Include="Images\PQT000116-300x300.jpg" />
+    <Content Include="Images\nike-logo.png" />
     <Content Include="Images\prev.png" />
-    <Content Include="Images\PSD000528-300x300.jpg" />
-    <Content Include="Images\PSN000494-300x300.jpg" />
-    <Content Include="Images\PSN000565-300x300.jpg" />
-    <Content Include="Images\quan-dui-nam-so-69-cao-cap.jpg" />
-    <Content Include="Images\quan-jean-nam.jpg" />
-    <Content Include="Images\quan-jeans-nam-cao-cap.jpg" />
-    <Content Include="Images\quan-jeans-nam-nhan-goi-trai.jpg" />
-    <Content Include="Images\quan-jeans-nu-nhan-chu-dui-ca-tinh.jpg" />
-    <Content Include="Images\quan-jeans-nu-ong-suong-cach-dieu-ca-tinh.jpg" />
-    <Content Include="Images\quan-jeans-nu-wash-ong-doc-dao.jpg" />
-    <Content Include="Images\quan-jogger-day-keo-nu-xanh-than.jpg" />
-    <Content Include="Images\quan-jogger-jean-mau-xanh-bien.jpg" />
-    <Content Include="Images\quan-jogger-kaki-bo-lai.png" />
-    <Content Include="Images\quan-jogger-kaki-nu-xam-trang.jpg" />
-    <Content Include="Images\quan-jogger-nu-co-khoa.jpg" />
-    <Content Include="Images\quan-kaki-co-nap-tui-sau.png" />
-    <Content Include="Images\quan-kaki-lung-phoi-day-soc.png" />
-    <Content Include="Images\quan-kaki-lung.png" />
-    <Content Include="Images\quan-shorrt-lung-thun-vien-soc.png" />
-    <Content Include="Images\quan-short-2-tui-lai.png" />
-    <Content Include="Images\quan-short-jean-nhung.png" />
-    <Content Include="Images\quan-short-jeans-co-khuy.jpg" />
-    <Content Include="Images\quan-short-jeans-nam.jpg" />
-    <Content Include="Images\quan-tay-lung-thun-cai-nut.png" />
-    <Content Include="Images\quan-tay-nazafu.png" />
-    <Content Include="Images\quan-tay-phoi-day-det.png" />
-    <Content Include="Images\quan-tay-xep-ly-form.png" />
-    <Content Include="Images\so-mi-nam-caro.jpg" />
-    <Content Include="Images\so-mi-nam-han-quoc.jpg" />
-    <Content Include="Images\so-mi-nu-kieu-co-vuong-hien-dai.jpg" />
     <Content Include="Images\to-top.png" />
-    <Content Include="Images\trangphucnam1.jpg" />
-    <Content Include="Images\trangphucnu 2.jpg" />
-    <Content Include="Images\your-logo %281%29.png" />
+    <Content Include="Images\ultraboost-logo.png" />
+    <Content Include="Images\vans-logo.png" />
+    <Content Include="Images\yezzy-logo.png" />
     <Content Include="JS\bootstrap.min.css" />
     <Content Include="JS\bootstrap.min.js" />
     <Content Include="JS\font.css" />
@@ -391,6 +319,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -540,6 +469,10 @@
     <Content Include="Views\ThemXoaSua\QuanLiKhachHang.cshtml" />
     <Content Include="Views\Home\GioiThieu.cshtml" />
     <Content Include="Views\DangNhap\DangNhap.cshtml" />
+    <Content Include="Views\ThemXoaSua\Duplicate.cshtml" />
+    <Content Include="Views\ThemXoaSua\_Notifications.cshtml" />
+    <Content Include="Views\LoaiSP\Index.cshtml" />
+    <Content Include="Views\LoaiSP\Create.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

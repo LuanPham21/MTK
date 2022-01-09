@@ -1,12 +1,13 @@
-﻿    @model MyProject.SanPham
+﻿@model MyProject.SanPham
 
 @{
     ViewBag.Title = "SuaSanPham";
     Layout = "~/Views/Admin/LayoutAdmin.cshtml";
 }
-
+@Html.Partial("_Notifications")
 <div class="container">
-    @using (Html.BeginForm()) { 
+    @using (Html.BeginForm())
+    {
         <h2 class="text-center lead mb-3 font-weight-bold" style="font-size: 36px; text-shadow: 0 0 8px rgba(0,0,0,0.2)" data-aos="flip-right">Sửa thông tin sản phẩm</h2>
         <div class="form-group">
             <p>Tên sản phẩm</p>
@@ -33,16 +34,16 @@
             @Html.DropDownListFor(model => model.GioiTinh, new List<SelectListItem> { new SelectListItem { Text = "Nam", Value = "Nam", Selected = true }, new SelectListItem { Text = "Nữ", Value = "Nữ" } }, new { @class = "form-control", htmlAttributes = new { @name = "gioiTinh" } })
             @Html.ValidationMessageFor(model => model.GioiTinh, "", new { @class = "text-danger" })
         </div>
-        <div class="form-group">
-            <p>Tên loại sản phẩm</p>
-            @Html.DropDownListFor(model => model.MaLoaiSP, null, "Loại sản phẩm", new { @class = "form-control", htmlAttributes = new { @name = "maLoaiSP" } })
-            @Html.ValidationMessageFor(model => model.MaLoaiSP, "", new { @class = "text-danger" })
-        </div>
-        <div class="form-group">
-            <p>Tên nhà cung cấp</p>
-            @Html.DropDownListFor(model => model.MaNCC, null, "Tên nhà cung cấp", new { @class = "form-control",htmlAttributes = new { @name = "maNCC" } })
-            @Html.ValidationMessageFor(model => model.MaNCC, "", new { @class = "text-danger" })
-        </div>
+        @*<div class="form-group">
+                <p>Tên loại sản phẩm</p>
+                @Html.DropDownListFor(model => model.MaLoaiSP, null, "Loại sản phẩm", new { @class = "form-control", htmlAttributes = new { @name = "maLoaiSP" } })
+                @Html.ValidationMessageFor(model => model.MaLoaiSP, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <p>Tên nhà cung cấp</p>
+                @Html.DropDownListFor(model => model.MaNCC, null, "Tên nhà cung cấp", new { @class = "form-control",htmlAttributes = new { @name = "maNCC" } })
+                @Html.ValidationMessageFor(model => model.MaNCC, "", new { @class = "text-danger" })
+            </div>*@
         <div class="form-group">
             <p>Số lượng tồn</p>
             @Html.TextBoxFor(model => model.SoLuongTon, new { @class = "form-control", htmlAttributes = new { @name = "soLuongTon" } })
@@ -60,4 +61,5 @@
         </div>
     }
 </div>
+
 

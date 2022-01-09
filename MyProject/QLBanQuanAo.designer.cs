@@ -20,9 +20,11 @@ namespace MyProject
 	using System.Linq.Expressions;
 	using System.ComponentModel;
 	using System;
-	
-	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="QLSHOPTHOITRANG")]
+    using MyProject.Models;
+    using System.Threading.Tasks;
+
+    [global::System.Data.Linq.Mapping.DatabaseAttribute(Name="QLSHOPTHOITRANG")]
+
 	public partial class QLBanQuanAoDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -48,9 +50,9 @@ namespace MyProject
     partial void InsertNhaCungCap(NhaCungCap instance);
     partial void UpdateNhaCungCap(NhaCungCap instance);
     partial void DeleteNhaCungCap(NhaCungCap instance);
-    #endregion
-		
-		public QLBanQuanAoDataContext() : 
+        #endregion
+
+        public QLBanQuanAoDataContext() : 
 				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["QLSHOPTHOITRANGConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
@@ -132,8 +134,7 @@ namespace MyProject
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ChiTietHoaDon")]
 	public partial class ChiTietHoaDon : INotifyPropertyChanging, INotifyPropertyChanged
 	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _MaHD;
 		
@@ -344,12 +345,25 @@ namespace MyProject
 			}
 		}
 	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SanPham")]
-	public partial class SanPham : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+    public interface PostPrototype
+    {
+        PostPrototype Clone();
+    }
+    public enum CodeAppUser
+    {
+        InvalidFullName,
+        InvalidBirthday,
+        Valid
+    }
+    interface MVCEntitySanPham
+    {
+        CodeAppUser UpdateDatabase(ThemSanPham<SanPham> sanPham);
+    }
+    [global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SanPham")]
+
+	public partial class SanPham : INotifyPropertyChanging, INotifyPropertyChanged,PostPrototype, MVCEntitySanPham
+    {
+        private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _MaSP;
 		
@@ -731,9 +745,56 @@ namespace MyProject
 			this.SendPropertyChanging();
 			entity.SanPham = null;
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.HoaDon")]
+
+        public PostPrototype Clone()
+        {
+            SanPham newPost = new SanPham();
+            newPost.TenSP = TenSP;
+            newPost.MoTa = MoTa;
+            newPost.GioiTinh = GioiTinh;
+            newPost.GiaBan = GiaBan;
+            newPost.GiaNhap = GiaNhap;
+            newPost.Anh = Anh;
+            newPost.MaLoaiSP = MaLoaiSP;
+            newPost.MaNCC = MaNCC;
+            newPost.SoLuongTon = SoLuongTon;
+            return newPost;
+        }
+
+        public CodeAppUser UpdateDatabase(ThemSanPham<SanPham> sanPham)
+        {
+            sanPham.UpdateAsync(this);
+            return CodeAppUser.Valid;
+        }
+    }
+    public class ProxySanPham : MVCEntitySanPham
+    {
+        private SanPham _sanPham;
+        public ProxySanPham(SanPham sanPham)
+        {
+            _sanPham = sanPham;
+        }
+        public CodeAppUser UpdateDatabase(ThemSanPham<SanPham> sanPham)
+        {
+            //StringComparison comp = StringComparison.OrdinalIgnoreCase;
+            string notAllow = "GIÀY NIKE REVOLUTION 5 NAM - ĐEN TRẮNG";
+            var gia = _sanPham.GiaBan - _sanPham.GiaNhap;
+            if (!_sanPham.TenSP.Contains(notAllow))
+            {
+                return CodeAppUser.InvalidFullName;
+            }
+            else if(gia < 0)
+            {
+                return CodeAppUser.InvalidBirthday;
+            }
+            else
+            {
+                return _sanPham.UpdateDatabase(sanPham);
+            }
+        }
+    }
+
+    [global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.HoaDon")]
 	public partial class HoaDon : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -959,8 +1020,8 @@ namespace MyProject
 			entity.HoaDon = null;
 		}
 	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.KhachHang")]
+
+    [global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.KhachHang")]
 	public partial class KhachHang : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1240,9 +1301,10 @@ namespace MyProject
 			this.SendPropertyChanging();
 			entity.KhachHang = null;
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LoaiSanPham")]
+    }
+
+
+    [global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.LoaiSanPham")]
 	public partial class LoaiSanPham : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1516,6 +1578,6 @@ namespace MyProject
 			this.SendPropertyChanging();
 			entity.NhaCungCap = null;
 		}
-	}
+    }
 }
 #pragma warning restore 1591

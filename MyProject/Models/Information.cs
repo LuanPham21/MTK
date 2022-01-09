@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
 namespace MyProject.Models {
+
     public class Information {
 
         [Required(ErrorMessage = "Tên đăng nhập không được để trống!")]
@@ -46,6 +48,5 @@ namespace MyProject.Models {
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$",ErrorMessage = "Số điện thoại không hợp lệ")]
         public string dienthoai { get; set; }
-
     }
 }

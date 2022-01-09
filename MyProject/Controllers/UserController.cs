@@ -50,17 +50,23 @@ namespace MyProject.Controllers
 
             //}
             //return View();
-            if (!String.IsNullOrEmpty(user.UserName) && !String.IsNullOrEmpty(user.Password)) {
+            if (!String.IsNullOrEmpty(user.UserName) && !String.IsNullOrEmpty(user.Password))
+            {
                 KhachHang kh = db.KhachHangs.SingleOrDefault(khachHang => khachHang.TaiKhoan == user.UserName && khachHang.MatKhau == user.Password);
-                if (kh != null) {
+                //SingletonPattern.Instace.Init();
+                //SingletonPattern singelton = SingletonPattern.Instace.Init();
+                if (kh != null)
+                {
                     Session["taikhoan"] = kh;
                     Session.Add("User", kh.TaiKhoan);
                     return RedirectToAction("SanPhamPartial", "SanPham");
                 }
-                else {
+                else
+                {
                     ViewBag.ThongBao = "Sai tên đăng nhập hoặc mật khẩu";
                 }
             }
+
             return View();
         }
         [HttpPost]

@@ -2,9 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace MyProject.Models {
-    public class HDKhachHangModel {
+    //interface MVCEntityBlog
+    //{
+    //    void UpdateDatabase (UserManager<AppUser> userManager);
+    //}
+    public class HDKhachHangModel
+    {
         public int MaKH { get; set; }
         public string TenKH { get; set; }
         public string TaiKhoan { get; set; }
